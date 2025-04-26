@@ -1,0 +1,84 @@
+<mat-card class="max-w-md p-[20px] items-center gap-10">
+  <mat-card-header class="text-2xl text-blue-700"> Lokkit </mat-card-header>
+  <mat-card-content>
+    <form [formGroup]="registerForm" action="">
+      <mat-form-field class="w-full">
+        <mat-label> Email </mat-label>
+        <input formControlName="email" matInput type="text" />
+      </mat-form-field>
+      @if(registerForm.controls.email.invalid &&
+      (registerForm.controls.email.touched ||
+      registerForm.controls.email.dirty)) {
+      @if(registerForm.controls.email.errors?.['email']) {
+      <p>Email not correct</p>
+      } @if(registerForm.controls.email.errors?.['required']) {
+      <p>Email is required</p>
+      } }
+
+      <mat-form-field class="w-full">
+        <mat-label> Fullname </mat-label>
+        <input formControlName="fullname" matInput type="text" />
+      </mat-form-field>
+      @if(registerForm.controls.fullname.invalid &&
+      (registerForm.controls.fullname.touched ||
+      registerForm.controls.fullname.dirty)) {
+      @if(registerForm.controls.fullname.errors?.['required']) {
+      <p>Fullname is required</p>
+      } @if(registerForm.controls.fullname.errors?.['minlength']) {
+      <p>The minimum fullname length is 6 characters</p>
+      } }
+
+      <mat-form-field class="w-full">
+        <mat-label> UserName </mat-label>
+        <input formControlName="username" matInput type="text" />
+      </mat-form-field>
+      @if(registerForm.controls.username.invalid &&
+      (registerForm.controls.username.touched ||
+      registerForm.controls.username.dirty)) {
+      @if(registerForm.controls.username.errors?.['required']) {
+      <p>UserName is required</p>
+      } @if(registerForm.controls.username.errors?.['minlength']) {
+      <p>The minimum username length is 6 characters</p>
+      } }
+
+      <mat-form-field class="w-full">
+        <mat-label> Password </mat-label>
+        <input formControlName="password" matInput type="password" />
+      </mat-form-field>
+      @if(registerForm.controls.password.invalid &&
+      (registerForm.controls.password.touched ||
+      registerForm.controls.password.dirty)) {
+      @if(registerForm.controls.password.errors?.['required']) {
+      <p>Password is required</p>
+      } @if(registerForm.controls.password.errors?.['minlength']) {
+      <p>The minimum password length is 6 characters</p>
+      } @if(registerForm.controls.password.errors?.['maxlength']) {
+      <p>The maximum password length is 12 characters</p>
+      } }
+
+      <mat-form-field class="w-full">
+        <mat-label> Confirm Password </mat-label>
+        <input formControlName="confirmPassword" matInput type="password" />
+      </mat-form-field>
+      @if(registerForm.controls.confirmPassword.invalid &&
+      (registerForm.controls.confirmPassword.touched ||
+      registerForm.controls.confirmPassword.dirty)) {
+      @if(registerForm.controls.confirmPassword.errors?.['required']) {
+      <p class="error-message">Confirm Password is required</p>
+      } @if(registerForm.hasError('passwordNotSame')) {
+      <p class="error-message">Confirm Passwords didn't match</p>
+      } }
+    </form>
+  </mat-card-content>
+  <mat-card-actions class="w-full flex flex-col">
+    <button (click)="onSumbit()" mat-flat-button class="w-full">
+      Register
+    </button>
+  </mat-card-actions>
+  <mat-card-footer class="w-full">
+    <div class="flex justify-between w-full">
+      <p class="text-blue-700">Do you have an account?</p>
+      <a class="text-blue-700" routerLink="/login">Log In</a>
+    </div>
+  </mat-card-footer>
+</mat-card>
