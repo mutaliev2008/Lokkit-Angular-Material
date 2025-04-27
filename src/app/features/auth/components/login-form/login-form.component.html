@@ -1,0 +1,53 @@
+<mat-card class="max-w-md items-center p5">
+  <mat-card-header>
+    <mat-card-title class="text-2xl text-blue-700">Lokkit</mat-card-title>
+  </mat-card-header>
+  <mat-card-content class="w-full">
+    <form [formGroup]="loginFrom" class="mt-10">
+      <mat-form-field class="w-full">
+        <mat-label>Email</mat-label>
+        <input formControlName="email" class="w-auto" matInput />
+      </mat-form-field>
+      @if(!this.loginFrom.controls.email.valid &&
+      this.loginFrom.controls['email'].touched ||
+      this.loginFrom.controls['email'].dirty) {
+      <p *ngIf="this.loginFrom.get(['email'])?.errors?.['email']">
+        Email not correct
+      </p>
+      <p *ngIf="this.loginFrom.get(['email'])?.errors?.['required']">
+        Email is required
+      </p>
+
+      }
+      <mat-form-field class="w-full">
+        <mat-label>Password</mat-label>
+        <input formControlName="password" matInput />
+      </mat-form-field>
+    </form>
+
+    @if(!this.loginFrom.controls.password.valid &&
+    this.loginFrom.controls.password.touched ||
+    this.loginFrom.controls.password.dirty) {
+    <p *ngIf="this.loginFrom.get(['password'])?.errors?.['required']">
+      Password is required
+    </p>
+    <p *ngIf="this.loginFrom.get(['password'])?.errors?.['minLength']">
+      The minimum password length is 6 characters
+    </p>
+    <p *ngIf="this.loginFrom.get(['password'])?.errors?.['maxLength']">
+      The maximum password length is 12 characters
+    </p>
+    }
+  </mat-card-content>
+  <mat-card-actions class="!flex-col w-full">
+    <div class="flex items-center w-full p-[10px] justify-between">
+      <mat-checkbox class="example-margin gap-10"> Remember me </mat-checkbox>
+      <a class="text-blue-700" href="">Forgot your password?</a>
+    </div>
+    <button class="w-full" (click)="onSumbit()" mat-flat-button>Log In</button>
+    <div class="flex items-center w-full p-[10px] justify-between">
+      <p class="text-blue-700">Don't have an account?</p>
+      <a class="text-blue-700" routerLink="/register">Register</a>
+    </div>
+  </mat-card-actions>
+</mat-card>
